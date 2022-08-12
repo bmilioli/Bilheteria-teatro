@@ -13,8 +13,6 @@ typedef struct
 
 void menu()
 { // Menu inicial do programa.
-
-    printf("  **** T E A T R O **** \n");
     printf("MENU PRINCIPAL \n\n");
     printf("1 - Visualizar mapa do teatro\n");
     printf("2 - Comprar cadeira\n");
@@ -161,36 +159,40 @@ int main()
         zerar(cadeira);
         controle = 1;
     }
-    menu();
-    scanf("%d", &op);
-    printf("\n");
-
-    switch (op)
+    printf("  ******* T E A T R O ******* \n");
+    do
     {
-    case 1:
-        printf("ESQUERDA \n");
-        for (i = 0; i < 22; i++)
+        menu();
+        scanf("%d", &op);
+        printf("\n");
+
+        switch (op)
         {
-            for (j = 0; j < 15; j++)
+        case 1:
+            for (i = 0; i < 22; i++)
             {
-                letranumero(i);
-                printf("%d-", j + 1);
-                printf("%s ", cadeira[i][j].status);
-            }
+                for (j = 0; j < 15; j++)
+                {
+                    letranumero(i);
+                    printf("%d-", j + 1);
+                    printf("%s ", cadeira[i][j].status);
+                }
 
-            printf("        ");
+                printf("        ");
 
-            for (j = 15; j < 30; j++)
-            {
-                letranumero(i);
-                printf("%d-", j + 1);
-                printf("%s ", cadeira[i][j].status);
+                for (j = 15; j < 30; j++)
+                {
+                    letranumero(i);
+                    printf("%d-", j + 1);
+                    printf("%s ", cadeira[i][j].status);
+                }
+                printf("\n");
             }
-            printf("\n");
+            break;
         }
-        break;
-    }
 
-    scanf("%d", &op);
+        printf("\n");
+    } while (op != 6);
+
     return 0;
 }
