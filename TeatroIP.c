@@ -23,34 +23,6 @@ void menu()
     printf("Digite o numero de uma das opcoes acima: ");
 }
 
-void subMenu1()
-{ // SubMenu para a função 01
-
-    printf("\n ------------------------------------------------------------- \n");
-    printf("1 - Comprar cadeira\n");
-    printf("2 - Reservar cadeira\n");
-    printf("3 - Consultar uma determinada cadeira da Sala\n");
-    printf("4 - Voltar ao menu principal\n");
-    printf("Digite o numero de uma das opcoes acima: ");
-}
-
-void subMenu2()
-{ // SubMenu para as funções 02 e 03
-    printf("\n ------------------------------------------------------------- \n");
-    printf("1 - Comprar nova cadeira\n");
-    printf("2 - Reservar nova cadeira\n");
-    printf("3 - Voltar ao menu principal\n");
-    printf("Digite o numero de uma das opcoes acima: ");
-}
-
-void subMenu3()
-{ // SubMenu para a função 04
-    printf("\n ------------------------------------------------------------- \n");
-    printf("1 - Editar dados\n");
-    printf("2 - Voltar ao menu principal\n");
-    printf("Digite o numero de uma das opcoes acima: ");
-}
-
 void letranumero(int numero)
 {
     switch (numero)
