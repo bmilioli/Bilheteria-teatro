@@ -193,30 +193,44 @@ void numeroletra(char letra, int *n) // Transforma a letra de uma fileira digita
     }
 }
 
-void zerar(cadeiras cadeira[21][29])
+void zerar(cadeiras vetor[22][30])
 {
+
     int i, j;
     for (i = 0; i < 22; i++)
         for (j = 0; j < 30; j++)
         {
-            strcpy(cadeira[i][j].nome, " ");
-            strcpy(cadeira[i][j].tel, " ");
-            strcpy(cadeira[i][j].email, " ");
-            strcpy(cadeira[i][j].status, "L");
-            cadeira[i][j].tipo = 0;
+            strcpy(vetor[i][j].nome, " ");
+            strcpy(vetor[i][j].tel, " ");
+            strcpy(vetor[i][j].email, " ");
+            strcpy(vetor[i][j].status, "L");
+            vetor[i][j].tipo = 0;
         }
+}
+
+void imprimirDados(int i, int j, cadeiras cadeira[22][30])
+{
+    printf("%s", cadeira[i][j].nome);
+    printf("Telefone: %s", cadeira[i][j].tel);
+    printf("Email: %s", cadeira[i][j].email);
+    if (cadeira[i][j].tipo == 1)
+    {
+        printf("Meia entrada\n");
+    }
+    else if (cadeira[i][j].tipo == 2)
+    {
+        printf("Entrada inteira\n");
+    }
 }
 
 int main()
 {
-    cadeiras cadeira[21][29];
-    int i, j, op, controle;
+    cadeiras cadeira[22][30];
+    int i, j, cont = 0, cont2 = 0;
+    int op;
     char aux;
-    if (controle != 1)
-    {
-        zerar(cadeira);
-        controle = 1;
-    }
+    zerar(cadeira);
+
     printf("  ******* T E A T R O ******* \n");
     do
     {
@@ -233,10 +247,11 @@ int main()
                 {
                     letranumero(i);
                     printf("%d-", j + 1);
+
                     printf("%s ", cadeira[i][j].status);
                 }
 
-                printf("        ");
+                printf("       ");
 
                 for (j = 15; j < 30; j++)
                 {
@@ -249,11 +264,13 @@ int main()
             break;
 
         case 2:
+            // system("clear");
             printf("Digite fileira da cadeira que deseja comprar: ");
             scanf(" %c", &aux);
             numeroletra(aux, &i);
             printf("Digite coluna da cadeira que deseja comprar: ");
             scanf("%d", &j);
+            getchar();
             j--;
             if (cadeira[i][j].status[0] == 'L')
             {
@@ -265,6 +282,16 @@ int main()
                 fgets(cadeira[i][j].email, 40, stdin);
                 printf("Digite 1 pra Meia e 2 para Inteira: ");
                 scanf("%d", &cadeira[i][j].tipo);
+
+                if (cadeira[i][j].tipo == 1)
+                {
+                    cont++;
+                }
+                else
+                {
+                    cont2++;
+                }
+
                 if (cadeira[i][j].tipo != 1 && cadeira[i][j].tipo != 2)
                 {
                     do
@@ -275,11 +302,11 @@ int main()
                 }
 
                 strcpy(cadeira[i][j].status, "O");
-                printf("Cadeira comprada com sucesso!\n");
+                printf("\nCadeira comprada com sucesso!\n");
             }
             else
             {
-                printf("Cadeira ja esta ocupada!\n");
+                printf("\nCadeira ja esta ocupada!\n");
             }
             break;
 
@@ -289,6 +316,7 @@ int main()
             numeroletra(aux, &i);
             printf("Digite coluna da cadeira que deseja reservar: ");
             scanf("%d", &j);
+            getchar();
             j--;
             if (cadeira[i][j].status[0] == 'L')
             {
@@ -300,6 +328,16 @@ int main()
                 fgets(cadeira[i][j].email, 40, stdin);
                 printf("Digite 1 pra Meia e 2 para Inteira: ");
                 scanf("%d", &cadeira[i][j].tipo);
+
+                if (cadeira[i][j].tipo == 1)
+                {
+                    cont++;
+                }
+                else
+                {
+                    cont2++;
+                }
+
                 if (cadeira[i][j].tipo != 1 && cadeira[i][j].tipo != 2)
                 {
                     do
@@ -310,17 +348,50 @@ int main()
                 }
 
                 strcpy(cadeira[i][j].status, "R");
-                printf("Cadeira reservada com sucesso!\n");
+                printf("\nCadeira reservada com sucesso!\n");
             }
             else
             {
-                printf("Cadeira ja esta ocupada!\n");
+                printf("\nCadeira ja esta ocupada!\n");
             }
+            break;
+
+        case 4:
+
+            printf("Digite fileira da cadeira que deseja consultar: ");
+            scanf(" %c", &aux);
+            numeroletra(aux, &i);
+            printf("Digite coluna da cadeira que deseja consultar:  ");
+            scanf("%d", &j);
+            getchar();
+            j--;
+
+            if (cadeira[i][j].status[0] == 'L')
+            {
+                printf("A cadeira está livre\n");
+            }
+            else if (cadeira[i][j].status[0] == 'O')
+            {
+                printf("\nA cadeira está ocupada por: ");
+                imprimirDados(i, j, cadeira);
+            }
+            else if (cadeira[i][j].status[0] == 'R')
+            {
+                printf("A cadeira está reservada por: ");
+                imprimirDados(i, j, cadeira);
+            }
+
+            break;
+
+        case 5:
+            printf("Total arrecadado: R$ %d,00 \n", (cont * 15) + (cont2 * 30));
             break;
         }
 
         printf("\n");
     } while (op != 6);
+
+    printf("OBRIGADO POR UTILIZAR O NOSSO SISTEMA!");
 
     return 0;
 }
